@@ -8,14 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
      <!-- Le styles -->
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <script src="./actions.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css" rel="stylesheet">
 
-<script src="./js/bootstrap.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
-<script src='../jscolor/jscolor.js'></script>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap.min.js"></script>
+  <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+  <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
+  <script src='http://jscolor.com/jscolor/jscolor.js'></script>
     <style type="text/css">
 
       body {
@@ -38,7 +37,6 @@
 
 
     </style>
-    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -88,7 +86,7 @@
             <h2 rel='tootltip' title='Is that bright red-beam annoying as shit? Make it purple instead!'>Power</h2>
             <center>
             <p>Want to save 5 cents a night?  Turn the damn thing on and off!</p>
-            <input type="button" rel='tootltip' title='title' id='b' value="turn on" onClick='onOff()'> </input>
+            <input type="button" rel='tootltip' title='title' id='turnOn' value="Turn On"> </input>
           </div>
         </form>
 
@@ -98,7 +96,7 @@
             <h2 rel='tootltip' title='Is that bright red-beam annoying as shit? Make it purple instead!'>Color</h2>
             <center>
             <p>Is that bright red-beam annoying as shit? Make it purple instead! </p>
-            <input id ='colory'class='color' onChange='colorpicker()'> </input>
+            <input id ='colory' class='color'> </input>
           </div>
         </form>
 
@@ -107,7 +105,7 @@
             <h2 rel='tootltip' title='Is that bright red-beam annoying as shit? Make it purple instead!'>Tone</h2>
             <center>
             <p>I'm not a big fan of this pitch, lets use something that will deafen Ryan a bit more</p>
-            <input type="range" rel='tootltip' title='title' id='c' min=0 max=100 onChange='ranger()'> </input>
+            <input type="range" rel='tootltip' title='title' id='sound' min="0" max="200" value="200"> </input>
           </div>
         </form>
 </div>
@@ -116,7 +114,7 @@
             <h2 rel='tootltip' title='Is that bright red-beam annoying as shit? Make it purple instead!'>Test</h2>
             <center>
             <p>Note sure what'll happen when one of Mic's tests fail?  Press this button to find out!</p>
-            <input type="button" rel='tootltip' title='title' id='d' value="Test" onClick='test()'></input>
+            <input type="button" rel='tootltip' title='title' id='test' value="Test"></input>
           </div>
         </form>
 
@@ -133,8 +131,42 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 <script>
+$(function () {
+  $("#turnOn").click(function () {
+    if( $(this).val() === "Turn On") {
+      $(this).val("Turn Off");
+      $.post("/off", function () {
 
-var onValue = 0
+      });
+    } else {
+      $(this).val("Turn On");
+      $.post("/on", function () {
+
+      });
+    }
+  });
+
+  $("#test").click(function () {
+    $.post("/siren", function () {
+
+    });
+  });
+
+  $("#colory").change(function () {
+    $.post("/color", $(this).val(), function () {
+
+    });
+  });
+
+  $("#sound").change(function () {
+    console.log("changing");
+    $.post("/tone", $(this).val(), function () {
+
+    });
+  });
+
+});
+/*var onValue = 0
     $(document).ready(function() {
            $(function () {
                 $(".bananas")
@@ -184,20 +216,7 @@ var onValue = 0
    //form submit test!
     document.getElementById("frm4").submit();
 
-  }
-
-
-
-
-    function setUsersVox(data){
-      for(i=0;i<data.length;i++){
-        var values = data[i]['values']
-        console.log(data[i]['values'] +data.length)
-      }
-    }
-
-
-
-    </script>
+  }*/
+  </script>
   </body>
 </html>
