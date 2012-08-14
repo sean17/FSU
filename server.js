@@ -1,6 +1,7 @@
 var firmata = require('firmata');
 var http = require('http');
 var url = require('url');
+var fs = require('fs')
 var currentBoard;
 var soundPin = 3;
 var servoPin = 5;
@@ -12,8 +13,29 @@ var port = process.env.NODE_PORT || 9892;
 var host = process.env.NODE_HOST || '0.0.0.0';
 var util = require('util');
 var routes = {
-	'/siren': siren
+	'/siren': siren,
+	'/color':color,
+	'/tone':tone,
+	'/rotate':rotate,
+	'/test':test
 };
+
+function color (){
+
+}
+
+function tone () {
+
+}
+
+function rotate () {
+
+}
+
+function test () {
+
+}
+
 function siren () {
 	console.log(currentBoard);
 	var board = currentBoard;
@@ -59,7 +81,7 @@ function siren () {
 	}, sirenDuration);
 }
 
-var server = firmata.createServer(function(board){
+/*var server = firmata.createServer(function(board){
 	currentBoard = board;
 	board.pinMode(servoPin, board.MODES.SERVO);
 	board.pinMode(soundPin, board.MODES.PWM);
@@ -70,7 +92,7 @@ var server = firmata.createServer(function(board){
 server.listen(3030,function(){
 	console.log('listening');
 });
-
+*/
 
 http.createServer(function(req, res) {
     var uri, body;
@@ -111,8 +133,18 @@ http.createServer(function(req, res) {
         });
     } else {
         // Route it
+       fs.readFile("./arduino.html", function (err, data) {
+      if (err) {
+        res.statusCode = 404
+        return res.end()
+      }
+
+      res.end(data)
+    })
+		//res.end('fuck')
         return route(req, res);
     }
+
 
 }).listen(port, host, function() {
     console.log('Server started on http://%s:%d', host, port);

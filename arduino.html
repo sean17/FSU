@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+     <!-- Le styles -->
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <script src="./actions.js"></script>
+
+<script src="./js/bootstrap.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
+<script src='../jscolor/jscolor.js'></script>
+    <style type="text/css">
+
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+
+      img {
+      }
+
+      .span3 {
+        background-color: #888888;
+        padding-bottom:20px;
+      }
+
+      h1, h2, p  {
+        text-align: center;
+      }
+
+
+
+    </style>
+    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    </head>
+
+  <body>
+
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Alarmification!</a>
+          <div class="nav-collapse">
+
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+
+      <div class="hero-unit">
+        <h1>Alarmify</h1>
+        <p>Welcome to the Voxer internal alarm system; where you can turn off that God-Damn screeching alarm!</p>
+      </div>
+
+      <!-- Example row of columns -->
+
+      <h1>Control all of the Things!</h1>
+      <div class="row">
+        <div id="voxers">
+
+        <form id='frm1' action='power' method='POST'>
+          <div class='span3'>
+            <h2 rel='tootltip' title='Is that bright red-beam annoying as shit? Make it purple instead!'>Power</h2>
+            <center>
+            <p>Want to save 5 cents a night?  Turn the damn thing on and off!</p>
+            <input type="button" rel='tootltip' title='title' id='b' value="turn on" onClick='onOff()'> </input>
+          </div>
+        </form>
+
+
+        <form id='frm2' action='color' method='POST'>
+          <div class='span3'>
+            <h2 rel='tootltip' title='Is that bright red-beam annoying as shit? Make it purple instead!'>Color</h2>
+            <center>
+            <p>Is that bright red-beam annoying as shit? Make it purple instead! </p>
+            <input id ='colory'class='color' onChange='colorpicker()'> </input>
+          </div>
+        </form>
+
+        <form id='frm3' action='tone' method='POST'>
+         <div class='span3'>
+            <h2 rel='tootltip' title='Is that bright red-beam annoying as shit? Make it purple instead!'>Tone</h2>
+            <center>
+            <p>I'm not a big fan of this pitch, lets use something that will deafen Ryan a bit more</p>
+            <input type="range" rel='tootltip' title='title' id='c' min=0 max=100 onChange='ranger()'> </input>
+          </div>
+        </form>
+</div>
+        <form id='frm4' action='test' method='POST'>
+          <div class='span3'>
+            <h2 rel='tootltip' title='Is that bright red-beam annoying as shit? Make it purple instead!'>Test</h2>
+            <center>
+            <p>Note sure what'll happen when one of Mic's tests fail?  Press this button to find out!</p>
+            <input type="button" rel='tootltip' title='title' id='d' value="Test" onClick='test()'></input>
+          </div>
+        </form>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Voxer 2012</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<script>
+
+var onValue = 0
+    $(document).ready(function() {
+           $(function () {
+                $(".bananas")
+            .tooltip({
+                offset: 10
+                    })
+            })
+    });
+    document.getElementById('c')
+    function tone()
+      {
+        console.log('the range is at:' + document.getElementById('c').value)
+      }
+
+  function colorpicker()
+    {
+      console.log(document.getElementById("colory").value)
+    document.getElementById("frm2").submit();
+    }
+
+  function onOff()
+    {
+      if(!onValue)
+        {
+          onValue++
+          b.value='turn off'
+          console.log('on')
+        }
+      else
+        {
+          b.value='turn on'
+          console.log('off')
+          onValue=0
+        }
+      document.getElementById("frm1").submit();
+    }
+
+
+  function ranger()
+    {
+      console.log(document.getElementById('c').value)
+      document.getElementById("frm3").submit();
+    }
+
+
+  function test(){
+   //form submit test!
+    document.getElementById("frm4").submit();
+
+  }
+
+
+
+
+    function setUsersVox(data){
+      for(i=0;i<data.length;i++){
+        var values = data[i]['values']
+        console.log(data[i]['values'] +data.length)
+      }
+    }
+
+
+
+    </script>
+  </body>
+</html>
