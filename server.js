@@ -10,7 +10,7 @@ var rgb = "FF0000";
 var servoSpeed = 1000;
 var soundFrequency = 200;
 var sirenDuration = 30000;
-var port = process.env.NODE_PORT || 9892;
+var port = process.env.NODE_PORT || 9893;
 var host = process.env.NODE_HOST || '0.0.0.0';
 var util = require('util');
 var routes = {
@@ -125,7 +125,7 @@ var server = firmata.createServer(function(board){
 	board.sendI2CWriteRequest(0x09, [0x6f]);
 	board.sendI2CWriteRequest(0x09, [0x6e, 0x00, 0x00, 0x00]);
 });
-server.listen(3030,function(){
+server.listen(9894,function(){
 	console.log('listening');
 });
 
